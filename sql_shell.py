@@ -21,6 +21,7 @@ while True:
                 if query.lstrip().upper().startswith('SELECT'):
                     print(cur.fetchall())
                 else:
+                    con.commit()
                     print('SUCCESS')
             except sql.Error as e:
                 print('AN ERROR OCCURED:', e.args[0])
