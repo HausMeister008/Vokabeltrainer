@@ -1,5 +1,5 @@
-import sqlite3 as sql
-con = sql.connect("vokabeln.db")
+import sqlite3
+con = sqlite3.connect("vokabeln.db")
 
 class SQL():
     def __init__(self):
