@@ -8,12 +8,14 @@ endlevel = 6
 voc_pool = db.get()
 box = {}
 
-print(voc_pool)
 
 for i in range(endlevel):
     box[i] = {}
 
 #print(box)
+
+for vok in voc_pool:
+    print(vok)
 
 for index, vokabel in enumerate(voc_pool):
     # 1. Runde -> {id: 1, front: 'hello world'...}
@@ -23,11 +25,9 @@ for index, vokabel in enumerate(voc_pool):
     # 1) box and stelle vom aktuellen vokabellevel -> dict ->
     vokabel_level = vokabel['lvl'] # bei lvl-von-vokabel = 1 -> vokabel_level = 1
     vokabel_id = vokabel['id']
-    print(vokabel)
     if vokabel_level < 6:
         box[vokabel['lvl']][vokabel['id']] = vokabel #öffnet Box, öffnet Level - setzt id auf entsprechende Vokabel
         voc_pool.pop(index)
-
 for lvl, content in box.items():
     print('lvl '+str(lvl) + ': ')
     for id_, voc in content.items():
