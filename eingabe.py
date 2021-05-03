@@ -6,7 +6,6 @@ class Eingabe:
     def __init__(self):
         self.main = tkinter.Tk()
         #Textfelder/Knöpfe/Label
-            
         #Definitionen für die Knöpfe
 
     def write(self):
@@ -45,12 +44,14 @@ class Eingabe:
         self.b1 = tkinter.Button(self.main, text="Ende", command = self.ende)
         self.b1.pack()
 
-        self.b2 = tkinter.Button(self.main, text = 'NEW WINDOW', command = start_new)
-        self.b2.pack()
-        self.main.mainloop()
+        #self.b2 = tkinter.Button(self.main, text = 'NEW WINDOW', command = start_new)
+        #self.b2.pack()
+        #self.main.mainloop()
         
 
 def start_new():
     eingabe = Eingabe() 
     eingabe.start()
-start_new()
+
+if __name__ == '__main__':
+    start_new()

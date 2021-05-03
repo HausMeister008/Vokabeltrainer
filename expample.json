@@ -1,0 +1,20 @@
+{
+    "voc_pool":[
+        {"id": 1, "front": "good morning", "back": "guten morgen", "add": "good morning ladies and gentleman", "lvl": 0},
+        {"id": 2, "front": "good morning", "back": "guten morgen", "add": "good morning ladies and gentleman", "lvl": 1},
+        {"id": 3, "front": "appropriate", "back": "angebracht", "add": "", "lvl": 1}
+    ], 
+
+
+    "box":{
+        "0": {
+            "1": {"id": 1, "front": "good morning", "back": "guten morgen", "add": "good morning ladies and gentleman", "lvl": 0}
+        },
+        "1": {
+            "2": {"id": 2, "front": "good morning", "back": "guten morgen", "add": "good morning ladies and gentleman", "lvl": 1},
+            "3":{"id": 3, "front": "appropriate", "back": "angebracht", "add": "", "lvl": 1}
+        }
+    }
+
+
+}
