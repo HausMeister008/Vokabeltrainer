@@ -30,10 +30,10 @@ class SQL():
         if order.lower() not in ['asc', 'desc']:
             order = 'asc'
 
-        if ordered_by.lower() not in ['lvl', 'id']:
+        if ordered_by.lower() not in ['level', 'id', 'lvl']:
             ordered_by = 'id'
-        if ordered_by.lower() == 'level':
-            ordered_by = 'lvl'
+        if ordered_by.lower() == 'lvl':
+            ordered_by = 'level'
 
         return_value = []
 

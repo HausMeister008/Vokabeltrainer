@@ -17,6 +17,8 @@ for i in range(endlevel):
 for vok in voc_pool:
     print(vok)
 
+to_delete_from_pool = []
+
 for index, vokabel in enumerate(voc_pool):
     # 1. Runde -> {id: 1, front: 'hello world'...}
     # Hier werden alle Vokabeln ihrem Level zugeordnet -> Wir nehmen die Karte und gucken uns das Level an
@@ -27,7 +29,17 @@ for index, vokabel in enumerate(voc_pool):
     vokabel_id = vokabel['id']
     if vokabel_level < 6:
         box[vokabel['lvl']][vokabel['id']] = vokabel #öffnet Box, öffnet Level - setzt id auf entsprechende Vokabel
-        voc_pool.pop(index)
+        to_delete_from_pool.append(vokabel_id)
+
+print(to_delete_from_pool)
+
+for id_ in to_delete_from_pool:
+    for i, v in enumerate(voc_pool):
+        if v['id'] == id_:
+            voc_pool.pop(i)
+
+
+
 for lvl, content in box.items():
     print('lvl '+str(lvl) + ': ')
     for id_, voc in content.items():
