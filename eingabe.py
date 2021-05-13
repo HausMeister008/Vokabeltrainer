@@ -1,4 +1,5 @@
 import tkinter
+import tkinter.ttk as ttk
 from functions import SQL
 
 
@@ -23,6 +24,9 @@ class Eingabe:
         self.main.destroy()
 
     def start(self):
+
+        fachauswahl = ttk.Spinbox(main,  command=anzeigen)
+
         self.l0 = tkinter.Label(self.main, text = "Bitte die Vokabel eingeben:")
         self.l0.pack()
         self.e0 = tkinter.Entry(self.main)
@@ -40,7 +44,7 @@ class Eingabe:
 
         self.b0 = tkinter.Button(self.main, text = "Bestätigen", command = self.write)
         self.b0.pack()
-
+    
         self.b1 = tkinter.Button(self.main, text="Ende", command = self.ende)
         self.b1.pack()
 

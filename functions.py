@@ -40,16 +40,16 @@ class SQL():
         if id != 0:
             if str(id).isdigit():
                 for row in self.cur.execute(f'select * from vokabeln where id = {id} order by {ordered_by} {order}'):
-                    return_value.append({'id': row[0], 'front': row[1], 'back': row[2], 'add': row[3], 'lvl': row[4]})
+                    return_value.append({'id': row[0], 'front': row[1], 'back': row[2], 'add': row[3], 'lvl': row[4], 'fach': row[5]})
 
             elif isinstance(id, list):
                 search_for = ','.join([str(id) for id in id])
                 for row in self.cur.execute(f'select * from vokabeln where id in ( {search_for} ) order by {ordered_by} {order}'):
-                    return_value.append({'id': row[0], 'front': row[1], 'back': row[2], 'add': row[3], 'lvl': row[4]})
+                    return_value.append({'id': row[0], 'front': row[1], 'back': row[2], 'add': row[3], 'lvl': row[4], 'fach': row[5]})
 
         else:
             for row in self.cur.execute(f'select * from vokabeln order by {ordered_by} {order}'):
-                return_value.append({'id': row[0], 'front': row[1], 'back': row[2], 'add': row[3], 'lvl': row[4]})
+                return_value.append({'id': row[0], 'front': row[1], 'back': row[2], 'add': row[3], 'lvl': row[4], 'fach': row[5]})
 
         return return_value
     
