@@ -5,10 +5,10 @@ class SQL():
     def __init__(self):
         self.cur = con.cursor()
 
-    def insert(self, front, back, addition = ''):
+    def insert(self, front, back, addition = '',fach = 'englisch'):
         print('\nINSERTING')
 
-        self.cur.execute('INSERT INTO vokabeln (vorderseite, rueckseite, zusatz) values(?, ?, ?)', (front, back, addition))
+        self.cur.execute('INSERT INTO vokabeln (vorderseite, rueckseite, zusatz, subject) values(?, ?, ?, ?)', (front, back, addition, fach))
         con.commit()
 
 
@@ -62,14 +62,16 @@ class SQL():
 
 # ---- USAGE ----
 
-# sql = SQL()
+if __name__ == '__main__':
+    sql = SQL()
 
-
+    # print(sql.get())
+    # sql.delete(6)
+    # sql.insert('Der Sinn des Lebens', 'The meaning of life', 'The meaning of life is not so obvious for many people. But the ones who found it are probably not as happy about it as they thought...')
 # print(sql.get(id = [1,2],order='desc'))
 
-# sql.update(1, -1)
+    # sql.update(5, 8)
 
-# sql.insert('appropriate', 'angebracht', 'it seemed appropriate to help her')
 
 # content = sql.get()
 # for i in content:

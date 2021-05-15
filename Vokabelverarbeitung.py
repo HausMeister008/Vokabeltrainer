@@ -27,7 +27,7 @@ def get_vocs(fach = 'englisch'):
         if vokabel['fach'] == fach:
             if vokabel_level < 6:
                 box[vokabel['lvl']][vokabel['id']] = vokabel #öffnet Box, öffnet Level - setzt id auf entsprechende Vokabel
-        to_delete_from_pool.append(vokabel_id)
+                to_delete_from_pool.append(vokabel_id)
 
 
     # print(to_delete_from_pool)
@@ -36,7 +36,6 @@ def get_vocs(fach = 'englisch'):
         for i, v in enumerate(voc_pool):
             if v['id'] == id_:
                 voc_pool.pop(i)
-
     return [box, voc_pool]
 
 
