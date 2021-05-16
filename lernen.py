@@ -68,3 +68,4 @@ class Lernen:
 if __name__ == '__main__':
     lernen = Lernen()
     lernen.start(front_or_back_first='b')
+#und das ist es
