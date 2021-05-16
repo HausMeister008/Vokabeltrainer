@@ -23,6 +23,7 @@ class Main():
     def start(self):
         self.main.geometry('900x600')
         self.main.configure(background = '#222')
+        
         self.main.mainloop()
 
 
