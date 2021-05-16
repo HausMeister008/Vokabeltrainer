@@ -66,8 +66,8 @@ if __name__ == '__main__':
     sql = SQL()
 
     # print(sql.get())
-    # sql.delete(6)
-    # sql.insert('Der Sinn des Lebens', 'The meaning of life', 'The meaning of life is not so obvious for many people. But the ones who found it are probably not as happy about it as they thought...')
+    # sql.delete(5)
+    # sql.insert('The meaning of life', 'Der Sinn des Lebens', 'The meaning of life is not so obvious for many people. But the ones who found it are probably not as happy about it as they thought...')
 # print(sql.get(id = [1,2],order='desc'))
 
     # sql.update(5, 8)

@@ -1,0 +1,6 @@
+Abschicken:
+    git add *
+    git commit -m 'was auch immer du schreiben willst'
+    git push origin main
+Runterladen:
+    git pull 
