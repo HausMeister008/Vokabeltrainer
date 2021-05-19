@@ -24,11 +24,11 @@ class SQL():
         con.commit()
 
 
-    def get(self, id = 0, order = 'asc', ordered_by = 'id'):
+    def get(self, id = 0, order = 'desc', ordered_by = 'id'):
         print('\nGETTING CONTENT')
 
         if order.lower() not in ['asc', 'desc']:
-            order = 'asc'
+            order = 'desc'
 
         if ordered_by.lower() not in ['level', 'id', 'lvl']:
             ordered_by = 'id'
@@ -65,7 +65,7 @@ class SQL():
 if __name__ == '__main__':
     sql = SQL()
 
-    # print(sql.get())
+    print(sql.get())
     # sql.delete(5)
     # sql.insert('The meaning of life', 'Der Sinn des Lebens', 'The meaning of life is not so obvious for many people. But the ones who found it are probably not as happy about it as they thought...')
 # print(sql.get(id = [1,2],order='desc'))
