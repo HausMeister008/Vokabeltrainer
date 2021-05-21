@@ -28,7 +28,7 @@ class Eingabe:
     def start(self):
 
         #Überschrift
-        self.ueberschrift = tkinter.Label(self.main, text = "neue Vokabelkarte anlegen:", font = ("Arial", 20, "underline", "bold"), fg='#2cab31', bg='#0A303E')
+        self.ueberschrift = tkinter.Label(self.main, text = "Neue Vokabelkarte anlegen:", font = ("Arial", 20, "underline", "bold"), fg='#2cab31', bg='#0A303E')
         self.ueberschrift.place(relx = 0.5, rely = 0.04, anchor = "n")
 
         #Fachauswahl
@@ -43,27 +43,27 @@ class Eingabe:
         #Vokabeleingabe
         self.l0 = tkinter.Label(self.main, text = "Bitte die Vokabel eingeben:", font = ("Arial", 14, "underline"),  fg='#9FC', bg='#0A303E')
         self.l0.place(relx = 0.3, rely = 0.4, anchor = "n")
-        self.e0 = tkinter.Entry(self.main, bg = '#dae6f1', font = ("Calibri", 12, "bold"))
+        self.e0 = tkinter.Entry(self.main, bg = '#dae6f1', font = ("Calibri", 13, "bold"))
         self.e0.place(relx = 0.3, rely = 0.45, anchor = "n")
 
         #Übersetzungseingabe
         self.l1 = tkinter.Label(self.main, text = "Bitte die Übersetzung eingeben:", font = ("Arial", 14, "underline"), fg='#9FC', bg='#0A303E')
         self.l1.place(relx = 0.7, rely = 0.4, anchor = "n")
-        self.e1 = tkinter.Entry(self.main, bg = '#dae6f1', font = ("Calibri", 12, "bold")) 
+        self.e1 = tkinter.Entry(self.main, bg = '#dae6f1', font = ("Calibri", 13, "bold")) 
         self.e1.place(relx = 0.7, rely = 0.45, anchor = "n")
 
         #Zusatz
         self.l2 = tkinter.Label(self.main, text = "Hier kannst du einen möglichen Zusatz eingeben:", font = ("Arial", 14, "underline"), fg='#9FC', bg='#0A303E')
         self.l2.place(relx = 0.5, rely = 0.6, anchor = "n" )
-        self.e2 = tkinter.Entry(self.main, bg = '#dae6f1', font = ("Calibri", 12, "bold"), width = 50)
+        self.e2 = tkinter.Entry(self.main, bg = '#dae6f1', font = ("Calibri", 13, "bold"), width = 40)
         self.e2.place(relx = 0.5, rely = 0.65, anchor = "n")
 
         #Bestätigen
-        self.b0 = tkinter.Button(self.main, text = "Speichern", bg = '#9da7ed', font = ("Arial", 12, "underline", "bold"), command = self.write)
+        self.b0 = tkinter.Button(self.main, text = "Speichern", bg = '#ff0095', font = ("Arial", 11, "bold"), command = self.write)
         self.b0.place(relx = 0.1, rely = 0.9, anchor = "n" )
     
         #Zurück
-        self.b1 = tkinter.Button(self.main, text="Zurück", bg = '#9da7ed', font = ("Arial", 12, "underline", "bold"), command = self.ende)
+        self.b1 = tkinter.Button(self.main, text="Zurück", bg = '#ff0095', font = ("Arial", 11, "bold"), command = self.ende)
         self.b1.place(relx = 0.9, rely = 0.9, anchor = "n")
 
 

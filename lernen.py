@@ -8,6 +8,8 @@ class Lernen:
     def __init__(self):
         self.list_of_voc_ids = []
         self.front_back_list = ['front', 'back']
+        self.current_voc_id = 0
+        self.all_vocs_dict = {}
         self.main = Tk()
         self.headline = Label(self.main, text = 'Vokabeln lernen', font = ('Arial',25, 'bold'), fg = '#fff', bg='#222').pack()
         self.anzeige_front = Label(self.main, bg='#222', fg='#0ff')
@@ -24,7 +26,9 @@ class Lernen:
     def end(self):
         self.main.destroy()
 
-    def auswerten(self, voc_id):
+    def auswerten(self, e):
+        voc_id = self.current_voc_id
+        voc = self.all_vocs_dict[voc_id]
         solution = self.solution.get().strip() # Eingabe der Lösung
         if solution == voc[self.front_back_list[1]]: # Wenn die Lösung stimmt
             if voc['add'] != '': # Wenn es noch eine Addition gibt, add also nicht leer ist
@@ -44,10 +48,10 @@ class Lernen:
         # for voc_id in self.list_of_voc_ids:
         #     current_variable = all_vocs_dict[voc_id]
         #     print(current_variable[self.front_back_list[0]])
-        current_voc_id = self.list_of_voc_ids[0]
+        self.current_voc_id = self.list_of_voc_ids[0]
         self.anzeige_front['text'] = all_vocs_dict[self.list_of_voc_ids[0]][self.front_back_list[0]]
         print(self.anzeige_front['text'])
-        self.enter_solution.bind('<Return>', lambda : self.auswerten(self.list_of_voc_ids[0]))
+        self.solution.bind('<Return>', self.auswerten)
         del self.list_of_voc_ids[0]
 
     def start(self, fach = 'englisch', front_or_back_first = 'f'):
@@ -64,10 +68,10 @@ class Lernen:
         pool_dict:dict = {i['lvl']:{i['id']:i} for i in pool}
         all_vocs = [content for drawer, content in {**box, **pool_dict}.items()]
         # all_vocs = {j,k for i.items() in all_vocs}
-        all_vocs_dict:dict = {}
+        self.all_vocs_dict:dict = {}
         for i in all_vocs:
             for j, k in i.items():
-                all_vocs_dict[j] = k
+                self.all_vocs_dict[j] = k
         # print(all_vocs_dict)
 
         pool_percent = 0.5 # Der Prozentsatz an bereits gemeisterten Vokabeln (wird irgendwann mit Schieberegler übergeben)
@@ -108,12 +112,12 @@ class Lernen:
                     self.list_of_voc_ids.append(voc_id) # der liste die id anhängen, damit man später auf alle in der runde vorkommenden 
                 del pool[0:l]
         
-        self.anzeige_front['text'] = voc[self.front_back_list[0]] # hier noch geprintet... später dann als label
+        self.anzeige_front['text'] = self.all_vocs_dict[self.list_of_voc_ids[0]][self.front_back_list[0]] # hier noch geprintet... später dann als label
         self.solution.delete(0, END)
 
         # Als nächstes müssen wir die Liste aus IDS verwerten -> erste laden und alle anderen danach
-        self.start_process(all_vocs_dict)
-        # self.main.mainloop()
+        self.start_process(self.all_vocs_dict)
+        self.main.mainloop()
 
 if __name__ == '__main__':
     lernen = Lernen()

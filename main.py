@@ -1,10 +1,10 @@
 from tkinter import *
 from eingabe import *
-#from lernen import *
+from lernen import *
 
-#def start_learn():
-    #learn_window = Lernen()
-    #learn_window.start()
+def start_learn():
+    learn_window = Lernen()
+    learn_window.start()
 
 def start_add():
     add_window = Eingabe()
