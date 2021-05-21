@@ -41,18 +41,21 @@ class Lernen:
                 if v['id'] == voc_id:
                     pool.pop(i)
         self.solution.delete(0, END)
-        self.start_process()
+        self.start_process(self.all_vocs_dict)
                     
     def start_process(self, all_vocs_dict):
         # print(self.list_of_voc_ids)
         # for voc_id in self.list_of_voc_ids:
         #     current_variable = all_vocs_dict[voc_id]
         #     print(current_variable[self.front_back_list[0]])
-        self.current_voc_id = self.list_of_voc_ids[0]
-        self.anzeige_front['text'] = all_vocs_dict[self.list_of_voc_ids[0]][self.front_back_list[0]]
-        print(self.anzeige_front['text'])
-        self.solution.bind('<Return>', self.auswerten)
-        del self.list_of_voc_ids[0]
+        if len(self.list_of_voc_ids)> 0:
+            self.current_voc_id = self.list_of_voc_ids[0]
+            self.anzeige_front['text'] = all_vocs_dict[self.list_of_voc_ids[0]][self.front_back_list[0]]
+            print(self.anzeige_front['text'])
+            self.solution.bind('<Return>', self.auswerten)
+            del self.list_of_voc_ids[0]
+        else:
+            pass
 
     def start(self, fach = 'englisch', front_or_back_first = 'f'):
         self.main.geometry('900x600')
