@@ -65,10 +65,10 @@ class SQL():
 if __name__ == '__main__':
     sql = SQL()
 
-    print(sql.get())
+    # print(sql.get())
     # sql.delete(5)
     # sql.insert('The meaning of life', 'Der Sinn des Lebens', 'The meaning of life is not so obvious for many people. But the ones who found it are probably not as happy about it as they thought...')
-# print(sql.get(id = [1,2],order='desc'))
+    # print(sql.get(id = [1,2],order='desc'))
 
     # sql.update(5, 8)
 
