@@ -1,41 +1,64 @@
+"""Übrigens, bei der Formel "ladies and gentlemen" schreibt man "men" mit e 
+ und nicht mit a, ansonsten würde es "meine Damen und mein Herr" heißen... :=)"""
+
+
+
 from tkinter import *
 from Vokabelverarbeitung import *
 import random
 import math
 import time
 
+
 class Lernen:
+
+    #Einführung der ganzen Labels usw: 
     def __init__(self):
         self.list_of_voc_ids = []
         self.front_back_list = ['front', 'back']
         self.current_voc_id = 0
         self.all_vocs_dict = {}
         self.main = Tk()
-        self.headline = Label(self.main, text = 'Vokabeln lernen', font = ('Arial',25, 'bold'), fg = '#fff', bg='#222').pack()
-        self.anzeige_front = Label(self.main, bg='#222', fg='#0ff')
-        self.anzeige_front.pack()
-        self.enter_solution = Label(self.main,  text = 'Lösung:', bg='#222', fg='#0ff')
-        self.enter_solution.pack()
-        self.solution = Entry(self.main, bg='#222', fg='#0ff')
-        self.solution.pack()
-        self.addition = Label(self.main, bg='#222', fg='#0ff')
-        self.addition.pack()
-        self.wrong_or_right = Label(self.main, bg='#222', fg='#0ff')
-        self.wrong_or_right.pack()
+        self.headline = Label(self.main, text = 'Vokabeln lernen', font = ("Arial", 20, "underline", "bold"), fg='#2cab31', bg='#0A303E')
+        self.headline.place(relx = 0.5, rely = 0.04, anchor= "n")
+        self.anzeige_vokabel = Label(self.main,  text = 'Vokabel:', font = ("Arial", 14, "underline"),  fg='#9FC', bg='#0A303E') #Denk dir meinetwegen noch nen anständigen Namen aus
+        self.anzeige_vokabel.place(relx = 0.5, rely = 0.15, anchor= "n")
+        self.anzeige_front = Label(self.main, font = ("Arial", 14),  fg='#9FC', bg='#0A303E')
+        self.anzeige_front.place(relx = 0.5, rely = 0.2, anchor= "n")
+        self.enter_solution = Label(self.main,  text = 'Übersetzung:', font = ("Arial", 14, "underline"),  fg='#9FC', bg='#0A303E')
+        self.enter_solution.place(relx = 0.5, rely = 0.3, anchor= "n")
+        self.solution = Entry(self.main, bg = '#dae6f1', font = ("Calibri", 13, "bold"))
+        self.solution.place(relx = 0.5, rely = 0.35, anchor= "n")
+        self.wrong_or_right = Label(self.main, font = ("Arial", 14, "underline"),  fg='#9FC', bg='#0A303E')
+        self.wrong_or_right.place(relx = 0.5, rely = 0.45, anchor= "n")
+        self.anzeige_zusatz = Label(self.main, font = ("Arial", 14, "underline"),  fg='#9FC', bg='#0A303E')
+        self.anzeige_zusatz.place(relx = 0.5, rely = 0.55, anchor = "n" )
+        self.addition = Label(self.main, font = ("Arial", 14),  fg='#9FC', bg='#0A303E')
+        self.addition.place(relx = 0.5, rely = 0.6, anchor= "n")
+        
+        #Zurück
+        self.back = Button(self.main, text="Zurück", bg = '#ff0095', font = ("Arial", 11, "bold"), command = self.end)
+        self.back.place(relx = 0.9, rely = 0.9, anchor = "n")
+        #Button um die nächste Vokabel zu laden, nur mal für die Zukunft
+        self.next = Button(self.main, text = "Nächste Vokabel", bg = '#ff0095', font = ("Arial", 11, "bold"))
+        self.next.place(relx = 0.1, rely = 0.9, anchor = "n" )
 
+    #Not aus:
     def end(self):
         self.main.destroy()
 
+    #Auswertung, öb die Übersetzung richtig oder falsch ist:
     def auswerten(self, e):
         voc_id = self.current_voc_id
         voc = self.all_vocs_dict[voc_id]
         solution = self.solution.get().strip() # Eingabe der Lösung
         if solution == voc[self.front_back_list[1]]: # Wenn die Lösung stimmt
-            if voc['add'] != '': # Wenn es noch eine Addition gibt, add also nicht leer ist
-                self.addition["text"] = voc['add'] # Auch als Label
-            self.wrong_or_right['text'] = 'CORRECT!' 
+            self.wrong_or_right['text'] = 'Richtig!' 
         else: # Sonst ist es falsch und die richtige Lösung wird vorgegeben
-            self.wrong_or_right['text'] = 'WRONG -', voc[self.front_back_list[1]]
+            self.wrong_or_right["text"] = 'Falsch; ', voc[self.front_back_list[1]]
+        if voc['add'] != '': # Wenn es noch eine Addition gibt, add also nicht leer ist
+                self.anzeige_zusatz["text"] = "Zusatz:"
+                self.addition["text"] = voc['add'] # Auch als Label
         if voc_id in [k['id'] for k in voc_pool]: # wenn die momentane vokabel sich im pool befindet, die ID also in den ID der pool-vokabeln ist
             for i, v in enumerate(pool): # aus dem pool die entsprechende vokabel löschen
                 if v['id'] == voc_id:
@@ -43,6 +66,7 @@ class Lernen:
         self.solution.delete(0, END)
         self.start_process(self.all_vocs_dict)
                     
+    #Definitiv nochmal Erklärungsbedarf....
     def start_process(self, all_vocs_dict):
         # print(self.list_of_voc_ids)
         # for voc_id in self.list_of_voc_ids:
@@ -54,12 +78,14 @@ class Lernen:
             print(self.anzeige_front['text'])
             self.solution.bind('<Return>', self.auswerten)
             del self.list_of_voc_ids[0]
-        else:
+        else: #Warum ist hier ein Else?
             pass
 
+    #Configuriert das Hauptfenster, "sammelt" die Vokabeln
     def start(self, fach = 'englisch', front_or_back_first = 'f'):
-        self.main.geometry('900x600')
-        self.main.configure(background = '#222')
+        self.main.geometry('800x600')
+        self.main.configure(background = '#0A303E')
+        self.main.title("Vokabeln lernen")
         if front_or_back_first.lower() == 'b':
             self.front_back_list = ['back', 'front']
         else:
@@ -122,6 +148,8 @@ class Lernen:
         self.start_process(self.all_vocs_dict)
         self.main.mainloop()
 
+
+#Irgendwas mit Programm beim richtigen Namen starten?
 if __name__ == '__main__':
     lernen = Lernen()
     lernen.start(front_or_back_first='b')

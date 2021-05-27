@@ -13,20 +13,25 @@ def start_add():
 class Main():
     def __init__(self):
         self.main = Tk()
-        self.headline = Label(self.main, text = 'Vokabeltrainer', font = ('Arial',25, 'bold'), fg = '#fff', bg='#222').pack()
-        #self.learn_button = Button(self.main, text = 'jetzt lernen', font=('Arial', 15), fg = '#fff', bg='#222', bd=1, command = start_learn).pack(pady=10)
-        Button(self.main, text ="neue Vokabeln hinzufügen",font=('Arial', 15), fg = '#fff', bg='#222', bd=1, command = start_add).pack(pady=10)
+        self.headline = Label(self.main, text = 'Vokabeltrainer', font = ("Arial", 20, "underline", "bold"), fg='#2cab31', bg='#0A303E' )
+        self.headline.place(relx = 0.5, rely = 0.04, anchor = "n")
+        self.learn_button = Button(self.main, text = 'jetzt lernen', font = ("Arial", 14, "underline"), fg='#9FC', bg='#040747', bd=1, command = start_learn)
+        self.learn_button.place(relx = 0.5, rely = 0.15, anchor = "n")
+        self.eingabe_button =Button(self.main, text ="neue Vokabeln hinzufügen", font = ("Arial", 14, "underline"), fg='#9FC', bg='#040747', bd=1, command = start_add)
+        self.eingabe_button.place(relx = 0.5, rely = 0.25, anchor = "n")
 
     def end(self):
         self.main.destroy()
 
     def start(self):
-        self.main.geometry('900x600')
-        self.main.configure(background = '#222')
-        
+        self.main.geometry('800x600')
+        self.main.configure(background = '#0A303E')
+        self.main.title("Hauptmenü")
         self.main.mainloop()
 
 
 if __name__ == '__main__':
     window = Main()
     window.start()
+
+
