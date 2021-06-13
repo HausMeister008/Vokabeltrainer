@@ -40,12 +40,18 @@ class Lernen:
         self.back = Button(self.main, text="Zurück", bg = '#ff0095', font = ("Arial", 11, "bold"), command = self.end)
         self.back.place(relx = 0.9, rely = 0.9, anchor = "n")
         #Button um die nächste Vokabel zu laden, nur mal für die Zukunft
-        self.next = Button(self.main, text = "Nächste Vokabel", bg = '#ff0095', font = ("Arial", 11, "bold"))
-        self.next.place(relx = 0.1, rely = 0.9, anchor = "n" )
+        self.next = Button(self.main, text = "Nächste Vokabel", bg = '#ff0095', font = ("Arial", 11, "bold"),  command = self.weiter)
+        self.next.place(relx = 0.1, rely = 0.9, anchor = "n")
 
     #Not aus:
     def end(self):
         self.main.destroy()
+
+    def weiter(self, e):
+        self.solution.delete(0, END)
+        self.addition["text"] = ""
+        self.start_process(self.all_vocs_dict)
+        self.wrong_or_right['text'] = ''
 
     #Auswertung, öb die Übersetzung richtig oder falsch ist:
     def auswerten(self, e):
@@ -63,8 +69,7 @@ class Lernen:
             for i, v in enumerate(pool): # aus dem pool die entsprechende vokabel löschen
                 if v['id'] == voc_id:
                     pool.pop(i)
-        self.solution.delete(0, END)
-        self.start_process(self.all_vocs_dict)
+        self.solution.bind('<Return>', self.weiter)
                     
     #Definitiv nochmal Erklärungsbedarf....
     def start_process(self, all_vocs_dict):
