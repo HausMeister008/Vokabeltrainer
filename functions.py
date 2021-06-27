@@ -58,6 +58,10 @@ class SQL():
         query = f"UPDATE vokabeln SET level = level + {aufstieg}  WHERE id = {vokabel_id}"
         self.cur.execute(query)
         con.commit()
+    def getsubjects(self):
+        query = 'GET * from vokabeln'
+        result = self.cur.execute(query)
+
 
 
 # ---- USAGE ----
