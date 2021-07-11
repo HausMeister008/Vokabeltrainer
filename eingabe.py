@@ -2,16 +2,16 @@ import tkinter
 import tkinter.ttk as ttk
 from functions import SQL
 
-
 class Eingabe:
     def __init__(self):
+        self.sql = SQL()
         self.main = tkinter.Tk()
         self.main.geometry('800x600')
         self.main.configure(background = '#0A303E')
         self.main.title("neue Vokabel hinzufügen")
 
     def write(self):
-        fach = self.fachanzeige.get()
+        fach = self.fachauswahl.get()
         front = self.e0.get()
         back = self.e1.get()
         addition = self.e2.get()
@@ -34,8 +34,9 @@ class Eingabe:
         #Fachauswahl
         self.fachanzeige = tkinter.Label(self.main, text="Aktuelle Fachauswahl: ", font = ("Arial", 14, "underline"), fg='#9FC', bg='#0A303E' )
         self.fachanzeige.place(relx = 0.5, rely = 0.2, anchor = "n")
+        list_of_subjects = self.sql.listofsubjects()
         self.fachauswahl = ttk.Spinbox(self.main,
-            values=("englisch", "französisch", "latein", "spanisch"),
+            values=[subject for subject in list_of_subjects],
             width=15 ) #Dringend Variablen für die Sprache einfügen
         self.fachauswahl.set("englisch")
         self.fachauswahl.place(relx = 0.5, rely = 0.25, anchor = "n")
@@ -63,8 +64,9 @@ class Eingabe:
         self.b0.place(relx = 0.1, rely = 0.9, anchor = "n" )
     
         #Zurück
-        self.b1 = tkinter.Button(self.main, text="Zurück", bg = '#ff0095', font = ("Arial", 11, "bold"), command = self.end)
+        self.b1 = tkinter.Button(self.main, text="Beenden", bg = '#ff0095', font = ("Arial", 11, "bold"), command = self.end)
         self.b1.place(relx = 0.9, rely = 0.9, anchor = "n")
+        self.main.mainloop()
 
 
 

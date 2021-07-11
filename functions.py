@@ -1,9 +1,11 @@
 import sqlite3
 con = sqlite3.connect("vokabeln.db")
+con_subjects = sqlite3.connect('subjects.db')
 
 class SQL():
     def __init__(self):
         self.cur = con.cursor()
+        self.cur_subjects = con_subjects.cursor()
 
     def insert(self, front, back, addition = '',fach = 'englisch'):
         print('\nINSERTING')
@@ -58,13 +60,23 @@ class SQL():
         query = f"UPDATE vokabeln SET level = level + {aufstieg}  WHERE id = {vokabel_id}"
         self.cur.execute(query)
         con.commit()
+    
+    def listofsubjects(self):
+        #list_of_subjects = SQL.listofsubjects() --> gibt dir eine Liste
+        query = 'SELECT subject from vokabeln'
+        list_of_subjects = []
+        for row in self.cur.execute(query):
+            if row[0] not in list_of_subjects:
+                list_of_subjects.append(row[0])
+        # query = 'SELECT * from subjects'
+        return list_of_subjects
+    
 
 
 # ---- USAGE ----
 
 if __name__ == '__main__':
     sql = SQL()
-
     # print(sql.get())
     # sql.delete(5)
     # sql.insert('The meaning of life', 'Der Sinn des Lebens', 'The meaning of life is not so obvious for many people. But the ones who found it are probably not as happy about it as they thought...')
@@ -73,8 +85,8 @@ if __name__ == '__main__':
     # sql.update(5, 8)
 
 
-# content = sql.get()
-# for i in content:
-#     print('ID:',i['id'], '\n   Front:', i['front'], '\n   Back:', i['back'], '\n   Addition:', i['add'])
+    # content = sql.get()
+    # for i in content:
+    #     print('ID:',i['id'], '\n   Front:', i['front'], '\n   Back:', i['back'], '\n   Addition:', i['add'])
 
-# sql.delete(content[-1][0])
+    # sql.delete(content[-1][0])

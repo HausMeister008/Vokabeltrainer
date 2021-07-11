@@ -1,8 +1,3 @@
-"""Übrigens, bei der Formel "ladies and gentlemen" schreibt man "men" mit e 
- und nicht mit a, ansonsten würde es "meine Damen und mein Herr" heißen... :=)"""
-
-
-
 from tkinter import *
 from Vokabelverarbeitung import *
 import random
@@ -14,47 +9,70 @@ class Lernen:
 
     #Einführung der ganzen Labels usw: 
     def __init__(self):
+        self.list_of_motivations = [
+            'Es ist egal, wie langsam du vorankommst. Du überrundest noch immer jeden auf dem Sofa',
+            'Gestern hast du morgen gesagt!', 
+            'Es gibt kein "Ich kann das nicht". Höchstens ein "Ich kann das noch nicht"!',
+            'Man ist nicht stark oder schwach. Nur trainiert oder untrainiert.', 
+            'Erzähle den Leuten nicht von deinen Träumen. Zeige sie ihnen!',
+            'Jeder Mensch macht Fehler. Das Kunststück liegt darin, sie dann zu machen, wenn keiner zuschaut.',
+            'Wenn du die Person suchst, die dein Leben verändert: Schau in den Spiegel!', 
+            'Tue es JETZT... Denn "irgendwann später" wird zu NIEMALS.',
+            'Warte nicht darauf, dass die Dinge einfacher werden. Werde du besser!', 
+            'Schaue nur zurück, um zu sehen, wie weit du gekommen bist',
+            'Es ist nicht zu wenig Zeit, die wir haben, es ist zu viel Zeit, die wir nicht nutzen.',
+            'Du musst bereit sein, die Dinge zu tun, die andere niemals tun werden, um die Dinge zu haben, die andere niemals haben werden.',
+            'Das ganze Leben ist ein ewiges Wiederanfangen',
+            'Es ist nicht genug zu wissen - Man muss auch anwenden. Es ist nicht genug zu wollen - man muss auch tun.',
+            'Du bist besser, als du weißt. Und alle Hater fürchten sich vor dem Tag, an dem du das erkennst.',
+            'Mehr als die Vergangenheit interessiert mich die Zukunft. Denn in ihr gedenke ich zu leben!',
+            'Fokussiere dich darauf, effektiv zu sein, nicht beschäftigt.',
+            'Das kalte Wasser wird nicht wärmer, wenn du später springst.'
+            ]
         self.list_of_voc_ids = []
         self.front_back_list = ['front', 'back']
         self.current_voc_id = 0
         self.all_vocs_dict = {}
         self.main = Tk()
-        self.headline = Label(self.main, text = 'Vokabeln lernen', font = ("Arial", 20, "underline", "bold"), fg='#2cab31', bg='#0A303E')
+        self.headline = Label(self.main, text = random.choice(self.list_of_motivations), font = ("Arial", 20, "bold"), wraplength=750,fg='#2cab31', bg='#0A303E')
         self.headline.place(relx = 0.5, rely = 0.04, anchor= "n")
         self.anzeige_vokabel = Label(self.main,  text = 'Vokabel:', font = ("Arial", 14, "underline"),  fg='#9FC', bg='#0A303E') #Denk dir meinetwegen noch nen anständigen Namen aus
         self.anzeige_vokabel.place(relx = 0.5, rely = 0.15, anchor= "n")
         self.anzeige_front = Label(self.main, font = ("Arial", 14),  fg='#9FC', bg='#0A303E')
         self.anzeige_front.place(relx = 0.5, rely = 0.2, anchor= "n")
-        self.enter_solution = Label(self.main,  text = 'Übersetzung:', font = ("Arial", 14, "underline"),  fg='#9FC', bg='#0A303E')
+        self.enter_solution = Label(self.main,  text = 'Übersetzung:', font = ("Arial", 14),  fg='#9FC', bg='#0A303E')
         self.enter_solution.place(relx = 0.5, rely = 0.3, anchor= "n")
         self.solution = Entry(self.main, bg = '#dae6f1', font = ("Calibri", 13, "bold"))
         self.solution.place(relx = 0.5, rely = 0.35, anchor= "n")
-        self.wrong_or_right = Label(self.main, font = ("Arial", 14, "underline"),  fg='#9FC', bg='#0A303E')
+        self.wrong_or_right = Label(self.main, font = ("Arial", 14),  fg='#9FC', bg='#0A303E')
         self.wrong_or_right.place(relx = 0.5, rely = 0.45, anchor= "n")
-        self.anzeige_zusatz = Label(self.main, font = ("Arial", 14, "underline"),  fg='#9FC', bg='#0A303E')
-        self.anzeige_zusatz.place(relx = 0.5, rely = 0.55, anchor = "n" )
-        self.addition = Label(self.main, font = ("Arial", 14),  fg='#9FC', bg='#0A303E')
+        self.anzeige_zusatz = Label(self.main, font = ("Arial", 14),  fg='#9FC', bg='#0A303E' )
+        self.anzeige_zusatz.place(relx = 0.5, rely = 0.55, anchor = "n")
+        self.addition = Label(self.main, font = ("Arial", 14),  fg='#9FC', bg='#0A303E', wraplength=700)
         self.addition.place(relx = 0.5, rely = 0.6, anchor= "n")
         
         #Zurück
-        self.back = Button(self.main, text="Zurück", bg = '#ff0095', font = ("Arial", 11, "bold"), command = self.end)
+        self.back = Button(self.main, text="Beenden", bg = '#ff0095', font = ("Arial", 11, "bold"), command = self.end)
         self.back.place(relx = 0.9, rely = 0.9, anchor = "n")
         #Button um die nächste Vokabel zu laden, nur mal für die Zukunft
-        self.next = Button(self.main, text = "Nächste Vokabel", bg = '#ff0095', font = ("Arial", 11, "bold"),  command = self.weiter)
+        self.next = Button(self.main, text = "Auswerten", bg = '#ff0095', font = ("Arial", 11, "bold"),  command = self.auswerten)
         self.next.place(relx = 0.1, rely = 0.9, anchor = "n")
 
     #Not aus:
     def end(self):
         self.main.destroy()
 
-    def weiter(self, e):
+    def weiter(self, e = ''):
         self.solution.delete(0, END)
         self.addition["text"] = ""
         self.start_process(self.all_vocs_dict)
         self.wrong_or_right['text'] = ''
+        self.anzeige_zusatz['text'] = ''
+        self.next['text'] = 'Auswerten'
+        self.next['command'] = self.auswerten
 
     #Auswertung, öb die Übersetzung richtig oder falsch ist:
-    def auswerten(self, e):
+    def auswerten(self, e = ''):
         voc_id = self.current_voc_id
         voc = self.all_vocs_dict[voc_id]
         solution = self.solution.get().strip() # Eingabe der Lösung
@@ -69,6 +87,8 @@ class Lernen:
             for i, v in enumerate(pool): # aus dem pool die entsprechende vokabel löschen
                 if v['id'] == voc_id:
                     pool.pop(i)
+        self.next['text'] = 'Nächste Vokabel'
+        self.next['command'] = self.weiter
         self.solution.bind('<Return>', self.weiter)
                     
     #Definitiv nochmal Erklärungsbedarf....
@@ -84,17 +104,16 @@ class Lernen:
             self.solution.bind('<Return>', self.auswerten)
             del self.list_of_voc_ids[0]
         else: #Warum ist hier ein Else?
-            pass
+            self.end()
 
     #Configuriert das Hauptfenster, "sammelt" die Vokabeln
-    def start(self, fach = 'englisch', front_or_back_first = 'f'):
+    def start(self, fach = 'englisch', front_or_back_first = 'f', pool_percent = 0.5):
         self.main.geometry('800x600')
         self.main.configure(background = '#0A303E')
         self.main.title("Vokabeln lernen")
-        if front_or_back_first.lower() == 'b':
+        self.front_back_list = ['front', 'back']
+        if front_or_back_first.lower() in ['back', 'b']:
             self.front_back_list = ['back', 'front']
-        else:
-            self.front_back_list = ['front', 'back']
     
         box_and_pool = get_vocs(fach) # get_vocs gibt eine liste zurück
         box:dict = box_and_pool[0]
@@ -108,12 +127,12 @@ class Lernen:
                 self.all_vocs_dict[j] = k
         # print(all_vocs_dict)
 
-        pool_percent = 0.5 # Der Prozentsatz an bereits gemeisterten Vokabeln (wird irgendwann mit Schieberegler übergeben)
         to_learn_drawers_nr = 0 # in wie vielen der Fächer der Box sind Vokabeln
         for lvl, vocs in box.items(): # Herausfinden, wie viele Fächer was entahlten
             if len(vocs) > 0:
                 to_learn_drawers_nr += 1
         if to_learn_drawers_nr !=0:
+            # Der Prozentsatz an bereits gemeisterten Vokabeln
             pool_percent = pool_percent / to_learn_drawers_nr # Den Prozentsatz noch auf die ganzen Fächer verteilen -> So hat jedes Fach seinen Anteil an den pool-vocs
         
         if (float(pool_percent) % 1)>=0.5 or pool_percent < 0.5:
