@@ -26,7 +26,7 @@ class SQL():
         con.commit()
 
 
-    def get(self, id = 0, order = 'desc', ordered_by = 'id'):
+    def get(self, id = 0, order = 'desc', ordered_by = 'id', fach = 'englisch'):
         print('\nGETTING CONTENT')
 
         if order.lower() not in ['asc', 'desc']:
@@ -41,7 +41,7 @@ class SQL():
 
         if id != 0:
             if str(id).isdigit():
-                for row in self.cur.execute(f'select * from vokabeln where id = {id} order by {ordered_by} {order}'):
+                for row in self.cur.execute(f'select * from vokabeln where id = {id} and subj = {fach} order by {ordered_by} {order}'):
                     return_value.append({'id': row[0], 'front': row[1], 'back': row[2], 'add': row[3], 'lvl': row[4], 'fach': row[5]})
 
             elif isinstance(id, list):
