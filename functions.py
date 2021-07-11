@@ -1,9 +1,11 @@
 import sqlite3
 con = sqlite3.connect("vokabeln.db")
+con_subjects = sqlite3.connect('subjects.db')
 
 class SQL():
     def __init__(self):
         self.cur = con.cursor()
+        self.cur_subjects = con_subjects.cursor()
 
     def insert(self, front, back, addition = '',fach = 'englisch'):
         print('\nINSERTING')
@@ -66,10 +68,16 @@ class SQL():
         for row in self.cur.execute(query):
             if row[0] not in list_of_subjects:
                 list_of_subjects.append(row[0])
+<<<<<<< HEAD
         return list_of_subjects
 
         
 
+=======
+        # query = 'SELECT * from subjects'
+        return list_of_subjects
+    
+>>>>>>> d53059d18a521ff2ccae709a2ebdf5d373d730a4
 
 
 # ---- USAGE ----
@@ -84,8 +92,8 @@ if __name__ == '__main__':
     # sql.update(5, 8)
 
 
-# content = sql.get()
-# for i in content:
-#     print('ID:',i['id'], '\n   Front:', i['front'], '\n   Back:', i['back'], '\n   Addition:', i['add'])
+    # content = sql.get()
+    # for i in content:
+    #     print('ID:',i['id'], '\n   Front:', i['front'], '\n   Back:', i['back'], '\n   Addition:', i['add'])
 
-# sql.delete(content[-1][0])
+    # sql.delete(content[-1][0])
