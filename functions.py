@@ -58,9 +58,17 @@ class SQL():
         query = f"UPDATE vokabeln SET level = level + {aufstieg}  WHERE id = {vokabel_id}"
         self.cur.execute(query)
         con.commit()
-    def getsubjects(self):
-        query = 'GET * from vokabeln'
-        result = self.cur.execute(query)
+    
+    def listofsubjects(self):
+        #list_of_subjects = SQL.listofsubjects() --> gibt dir eine Liste
+        query = 'SELECT subject from vokabeln'
+        list_of_subjects = []
+        for row in self.cur.execute(query):
+            if row[0] not in list_of_subjects:
+                list_of_subjects.append(row[0])
+        return list_of_subjects
+
+        
 
 
 
@@ -68,7 +76,6 @@ class SQL():
 
 if __name__ == '__main__':
     sql = SQL()
-
     # print(sql.get())
     # sql.delete(5)
     # sql.insert('The meaning of life', 'Der Sinn des Lebens', 'The meaning of life is not so obvious for many people. But the ones who found it are probably not as happy about it as they thought...')
